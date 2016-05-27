@@ -56,33 +56,46 @@ else
     echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
 endif
 
-
+" Use bundles config {
+    if filereadable(expand("$VIM/_vimrc.bundles"))
+        source $VIM/_vimrc.bundles
+    endif
+" }
 
 set nu
-
-color desert
-"colorscheme solarized
+set tags=tags;
+set autochdir
+"color desert
+colorscheme solarized
 syntax enable
 syntax on
-set smartindent
+"set smartindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
 set hlsearch
 
-set tags=tags;
-set autochdir
+"set autowrite                       " Automatically write a file when leaving a modified buffer
+set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+set virtualedit=onemore             " Allow for cursor beyond last character
+set history=1000                    " Store a ton of history (default is 20)
+set spell                           " Spell checking on
+set hidden                          " Allow buffer switching without saving
+set iskeyword-=.                    " '.' is an end of word designator
+set iskeyword-=#                    " '#' is an end of word designator
+set iskeyword-=-                    " '-' is an end of word designatoa
 
-filetype off
-set rtp=~/.vim/bundle/vundle
-call vundle#begin()
+set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h12,Courier_New:h10
 
-Bundle 'gmarik/vundle'
-Bundle 'kien/ctrlp.vim'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/nerdcommenter'
 
-call vundle#end()
+"let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+let g:ycm_server_keep_logfiles = 1
+let g:YcmDebugInfo = '~/.vim/bundle/YouCompleteMe/log.txt'
+let g:ycm_server_log_level = 'debug'
+let g:YcmToggleLogs='~/.vim/bundle/YouCompleteMe/log.txt'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
-filetype plugin indent on
+winpos 0 0          " 设定窗口位置  
+set lines=60 columns=138    " 设定窗口大小  
